@@ -1,4 +1,4 @@
 /target/
-dl4j-memory-crash-dump-*.log
-hs_err_pid*.txt
-temp.csv
+*.log
+*.txt
+*.csv
