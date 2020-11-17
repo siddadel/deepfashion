@@ -1,4 +1,4 @@
-DEEP FASHION
+<h1>DEEP FASHION</h1>
 
 Can a machine imitate the mind of a fashion shopper?
 
