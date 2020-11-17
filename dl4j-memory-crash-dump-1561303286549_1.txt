@@ -1,0 +1,135 @@
+Deeplearning4j OOM Exception Encountered for MultiLayerNetwork
+Timestamp:                              2019-06-23 20:51:26.549
+Thread ID                               1
+Thread Name                             main
+
+
+Stack Trace:
+java.lang.OutOfMemoryError: Cannot allocate new LongPointer(8): totalBytes = 202M, physicalBytes = 8313M
+	at org.bytedeco.javacpp.LongPointer.<init>(LongPointer.java:76)
+	at org.bytedeco.javacpp.LongPointer.<init>(LongPointer.java:41)
+	at org.nd4j.linalg.api.buffer.BaseDataBuffer.<init>(BaseDataBuffer.java:385)
+	at org.nd4j.linalg.api.buffer.LongBuffer.<init>(LongBuffer.java:81)
+	at org.nd4j.linalg.api.buffer.factory.DefaultDataBufferFactory.createLong(DefaultDataBufferFactory.java:436)
+	at org.nd4j.linalg.api.buffer.factory.DefaultDataBufferFactory.createLong(DefaultDataBufferFactory.java:431)
+	at org.nd4j.linalg.factory.Nd4j.createBufferDetached(Nd4j.java:1462)
+	at org.nd4j.linalg.api.shape.Shape.createShapeInformation(Shape.java:3223)
+	at org.nd4j.linalg.api.ndarray.BaseShapeInfoProvider.createShapeInformation(BaseShapeInfoProvider.java:86)
+	at org.nd4j.linalg.cpu.nativecpu.DirectShapeInfoProvider.createShapeInformation(DirectShapeInfoProvider.java:59)
+	at org.nd4j.linalg.cpu.nativecpu.DirectShapeInfoProvider.createShapeInformation(DirectShapeInfoProvider.java:44)
+	at org.nd4j.linalg.api.ndarray.BaseNDArray.<init>(BaseNDArray.java:175)
+	at org.nd4j.linalg.cpu.nativecpu.NDArray.<init>(NDArray.java:77)
+	at org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory.create(CpuNDArrayFactory.java:205)
+	at org.nd4j.linalg.factory.Nd4j.create(Nd4j.java:3937)
+	at org.nd4j.linalg.api.ndarray.BaseNDArray.create(BaseNDArray.java:2215)
+	at org.nd4j.linalg.api.ndarray.BaseNDArray.permute(BaseNDArray.java:5576)
+	at org.nd4j.linalg.api.ndarray.BaseNDArray.transpose(BaseNDArray.java:4487)
+	at org.nd4j.linalg.api.blas.params.GemmParams.<init>(GemmParams.java:148)
+	at org.nd4j.linalg.api.blas.impl.BaseLevel3.gemm(BaseLevel3.java:88)
+	at org.nd4j.linalg.factory.Nd4j.gemm(Nd4j.java:984)
+	at org.deeplearning4j.nn.layers.BaseLayer.backpropGradient(BaseLayer.java:89)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.calcBackpropGradients(MultiLayerNetwork.java:1826)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.computeGradientAndScore(MultiLayerNetwork.java:2644)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.computeGradientAndScore(MultiLayerNetwork.java:2587)
+	at org.deeplearning4j.optimize.solvers.BaseOptimizer.gradientAndScore(BaseOptimizer.java:160)
+	at org.deeplearning4j.optimize.solvers.StochasticGradientDescent.optimize(StochasticGradientDescent.java:63)
+	at org.deeplearning4j.optimize.Solver.optimize(Solver.java:52)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.fitHelper(MultiLayerNetwork.java:2169)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.fit(MultiLayerNetwork.java:2126)
+	at org.deeplearning4j.nn.multilayer.MultiLayerNetwork.fit(MultiLayerNetwork.java:2194)
+	at data.learning.OrderLearner.fitAndSave(OrderLearner.java:81)
+	at data.learning.OrderLearner.run(OrderLearner.java:65)
+	at data.learning.OrderAmountCategoryLearner.main(OrderAmountCategoryLearner.java:24)
+Caused by: java.lang.OutOfMemoryError: Physical memory usage is too high: physicalBytes (8313M) > maxPhysicalBytes (7232M)
+	at org.bytedeco.javacpp.Pointer.deallocator(Pointer.java:584)
+	at org.bytedeco.javacpp.Pointer.init(Pointer.java:124)
+	at org.bytedeco.javacpp.LongPointer.allocateArray(Native Method)
+	at org.bytedeco.javacpp.LongPointer.<init>(LongPointer.java:68)
+	... 33 more
+
+
+========== Memory Information ==========
+----- Version Information -----
+Deeplearning4j Version                  1.0.0-beta3
+Deeplearning4j CUDA                     <not present>
+
+----- System Information -----
+Operating System                        Microsoft Windows 10
+CPU                                     Intel(R) Core(TM) i7-7700HQ CPU @ 2.80GHz
+CPU Cores - Physical                    4
+CPU Cores - Logical                     8
+Total System Memory                       15.89 GB (17059516416)
+
+----- ND4J Environment Information -----
+Data Type                               FLOAT
+backend                                 CPU
+blas.vendor                             MKL
+os                                      Windows 10
+
+----- Memory Configuration -----
+JVM Memory: XMX                            3.53 GB (3791650816)
+JVM Memory: current                        1.45 GB (1557659648)
+JavaCPP Memory: Max Bytes                  3.53 GB (3791650816)
+JavaCPP Memory: Max Physical               7.06 GB (7583301632)
+JavaCPP Memory: Current Bytes            202.41 MB (212247037)
+JavaCPP Memory: Current Physical           3.77 GB (4048973824)
+Periodic GC Enabled                     false
+
+----- Workspace Information -----
+Workspaces: # for current thread        4
+Current thread workspaces:
+  Name                      State       Size                          # Cycles            
+  WS_LAYER_WORKING_MEM      CLOSED             0 B                    9                   
+  WS_ALL_LAYERS_ACT         CLOSED         2.08 GB (2235819658)       1                   
+  WS_LAYER_ACT_2            CLOSED             0 B                    2                   
+  WS_LAYER_ACT_1            CLOSED             0 B                    3                   
+Workspaces total size                      2.08 GB (2235819658)
+
+----- Network Information -----
+Network # Parameters                    50447
+Parameter Memory                         197.06 KB (201788)
+Parameter Gradients Memory               197.06 KB (201788)
+Updater Number of Elements              0
+Updater Memory                                 0 B
+Updater Classes:
+  org.nd4j.linalg.learning.SgdUpdater
+Params + Gradient + Updater Memory       197.06 KB (201788)
+Iteration Count                         0
+Epoch Count                             0
+Backprop Type                           Standard
+Workspace Mode: Training                ENABLED
+Workspace Mode: Inference               ENABLED
+Number of Layers                        5
+Layer Counts
+  DenseLayer                              4
+  OutputLayer                             1
+Layer Parameter Breakdown
+  Idx Name                 Layer Type           Layer # Parameters   Layer Parameter Memory
+  0   layer0               DenseLayer           7200                   28.13 KB (28800)  
+  1   layer1               DenseLayer           40100                 156.64 KB (160400) 
+  2   layer2               DenseLayer           3030                   11.84 KB (12120)  
+  3   layer3               DenseLayer           93                        372 B          
+  4   layer4               OutputLayer          24                         96 B          
+
+----- Layer Helpers - Memory Use -----
+Total Helper Count                      0
+Helper Count w/ Memory                  0
+Total Helper Persistent Memory Use             0 B
+
+----- Network Activations: Inferred Activation Shapes -----
+Current Minibatch Size                  998758
+Input Shape                             [998758, 17]
+Idx Name                 Layer Type           Activations Type                           Activations Shape    # Elements   Memory      
+0   layer0               DenseLayer           InputTypeFeedForward(400)                  [998758, 400]        399503200       1.49 GB (1598012800)
+1   layer1               DenseLayer           InputTypeFeedForward(100)                  [998758, 100]        99875800      381.00 MB (399503200)
+2   layer2               DenseLayer           InputTypeFeedForward(30)                   [998758, 30]         29962740      114.30 MB (119850960)
+3   layer3               DenseLayer           InputTypeFeedForward(3)                    [998758, 3]          2996274        11.43 MB (11985096)
+4   layer4               OutputLayer          InputTypeFeedForward(6)                    [998758, 6]          5992548        22.86 MB (23970192)
+Total Activations Memory                   2.01 GB (2153322248)
+Total Activations Memory (per ex)          2.11 KB (2156)
+Total Activation Gradient Mem.             2.05 GB (2197267600)
+Total Activation Gradient Mem. (per ex)    2.15 KB (2200)
+
+----- Network Training Listeners -----
+Number of Listeners                     1
+Listener 0                              ScoreIterationListener(100)
